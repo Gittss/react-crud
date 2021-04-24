@@ -12,7 +12,24 @@ class CreateUser extends Component {
     this.state = {
       name: "",
       phone: "",
+      id: "",
     };
+  }
+
+  componentDidMount() {
+    axios
+      .get(`http://localhost:3001/user/view/${this.props.location.state.id}`)
+      .then((res) => {
+        if (res.data) {
+          const user = res.data;
+          console.log(user);
+          this.setState({
+            name: user.name,
+            phone: user.phone,
+            id: user.id,
+          });
+        } else this.setState({ name: "Not found" });
+      });
   }
 
   onChangeName(e) {
@@ -33,48 +50,90 @@ class CreateUser extends Component {
     const user = {
       name: this.state.name,
       phone: this.state.phone,
+      id: this.props.location.state.id,
     };
 
-    axios
-      .post("http://localhost:3001/user/createUser", user)
-      .then((res) => console.log(res.data));
+    if (this.props.location.state.id) {
+      axios
+        .post(`http://localhost:3001/user/update/${user.id}`, user)
+        .then((res) => console.log(res.data));
+    } else
+      axios
+        .post("http://localhost:3001/user/createUser", user)
+        .then((res) => console.log(res.data));
   }
 
   render() {
-    return (
-      <div className="container">
-        <h3>Add User</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Name : </label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChangeName}
-            ></input>
+    if (this.props.location.state.id) {
+      return (
+        <div className="container">
+          <h3>Update User</h3>
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label>Name : </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                value={this.state.name}
+                onChange={this.onChangeName}
+              ></input>
 
-            <label>Phone : </label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.phone}
-              onChange={this.onChangePhone}
-            ></input>
-          </div>
+              <label>Phone : </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                value={this.state.phone}
+                onChange={this.onChangePhone}
+              ></input>
+            </div>
 
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Create User"
-              className="btn btn-primary"
-            ></input>
-          </div>
-        </form>
-      </div>
-    );
+            <div className="form-group">
+              <input
+                type="submit"
+                value="Update User"
+                className="btn btn-primary"
+              ></input>
+            </div>
+          </form>
+        </div>
+      );
+    } else
+      return (
+        <div className="container">
+          <h3>Add User</h3>
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label>Name : </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                value={this.state.name}
+                onChange={this.onChangeName}
+              ></input>
+
+              <label>Phone : </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                value={this.state.phone}
+                onChange={this.onChangePhone}
+              ></input>
+            </div>
+
+            <div className="form-group">
+              <input
+                type="submit"
+                value="Create User"
+                className="btn btn-primary"
+              ></input>
+            </div>
+          </form>
+        </div>
+      );
   }
 }
 

@@ -2,12 +2,20 @@ const router = require("express").Router();
 const { json } = require("express");
 const User = require("../models/user");
 
+router.get("/view/:id", (req, res) => {
+  User.findById(req.params.id, (err, doc) => {
+    if (!err) {
+      res.send(doc);
+    } else console.log(err);
+  });
+});
+
 router.route("/createUser").post((req, res) => {
   var user = new User(req.body);
   user.save((err) => {
     if (!err) {
-      console.log("User created" + user);
-    }
+      res.send(user);
+    } else console.log(err);
   });
 });
 
@@ -19,16 +27,19 @@ router.get("/viewAll", (req, res) => {
   });
 });
 
-router.post("/update:id", (req, res) => {
-  User.findById(req.params.id, (err, doc) => {
+router.post("/update/:id", (req, res) => {
+  User.findByIdAndUpdate(req.params.id, req.body, (err, doc) => {
+    if (!err) res.send(doc);
+    else console.log(err);
+  });
+});
+
+router.get("/delete/:id", (req, res) => {
+  console.log("DELEEE");
+  User.findByIdAndRemove(req.params.id, (err, doc) => {
     if (!err) {
-      var user = {
-        name: req.body.name,
-        phone: req.body.phone,
-      };
-      User.findByIdAndUpdate(req.params.id, user, (err, updoc) => {
-        res.send(updoc);
-      });
+      res.send(doc);
+      console.log(doc);
     } else console.log(err);
   });
 });

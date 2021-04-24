@@ -12,7 +12,13 @@ class Navbar extends Component {
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
             <li className="navbar-item">
-              <Link to="/user/createUser" className="nav-link">
+              <Link
+                to={{
+                  pathname: "/user/createUser",
+                  state: { id: "" },
+                }}
+                className="nav-link"
+              >
                 Create User
               </Link>
             </li>
