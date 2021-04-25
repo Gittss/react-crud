@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router";
 
 class CreateUser extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class CreateUser extends Component {
       name: "",
       phone: "",
       id: "",
+      redirectToView: false,
     };
   }
 
@@ -57,13 +59,17 @@ class CreateUser extends Component {
       axios
         .post(`http://localhost:3001/user/update/${user.id}`, user)
         .then((res) => console.log(res.data));
+      this.setState({ redirectToView: true });
     } else
       axios
         .post("http://localhost:3001/user/createUser", user)
         .then((res) => console.log(res.data));
+    this.setState({ redirectToView: true });
   }
 
   render() {
+    const redirectToView = this.state.redirectToView;
+    if (redirectToView) return <Redirect to="/user/viewAll" />;
     if (this.props.location.state.id) {
       return (
         <div className="container">
