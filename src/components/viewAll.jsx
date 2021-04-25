@@ -4,7 +4,7 @@ import axios from "axios";
 
 function deleteUser(id) {
   axios
-    .get(`http://localhost:3001/user/delete/${id}`)
+    .get(`http://gits-mern.herokuapp.com/user/delete/${id}`)
     .then((res) => console.log(res.data));
   window.location.reload();
 }
@@ -20,12 +20,15 @@ const USER = (props) => (
       }}
       className="App-link"
     >
-      <td>
-        <i className="fa fa-pencil"></i> update
+      <td className="circle">
+        <i className="fa fa-pencil"></i>
       </td>
     </Link>
-    <td className="App-link" onClick={() => deleteUser(props.user._id)}>
-      <i className="fa fa-trash"></i> delete
+    <td
+      className="circle-red App-link"
+      onClick={() => deleteUser(props.user._id)}
+    >
+      <i className="fa fa-trash"></i>
     </td>
   </tr>
 );
@@ -40,7 +43,7 @@ class ViewAll extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3001/user/viewAll").then((res) => {
+    axios.get("http://gits-mern.herokuapp.com/user/viewAll").then((res) => {
       if (res.data.length > 0) {
         const users = res.data;
         this.setState({ users: users });

@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Navbar />
       <br />
-      <Route path="/" component={mainLayout} />
+      <Route exact path="/" component={mainLayout} />
       <Route path="/user/createUser" component={CreateUser} />
       <Route path="/user/viewAll" component={ViewAll} />
       <Route path="/user/update" component={CreateUser} />

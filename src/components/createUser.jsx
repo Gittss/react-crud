@@ -20,7 +20,9 @@ class CreateUser extends Component {
 
   componentDidMount() {
     axios
-      .get(`http://localhost:3001/user/view/${this.props.location.state.id}`)
+      .get(
+        `http://gits-mern.herokuapp.com/user/view/${this.props.location.state.id}`
+      )
       .then((res) => {
         if (res.data) {
           const user = res.data;
@@ -57,12 +59,12 @@ class CreateUser extends Component {
 
     if (this.props.location.state.id) {
       axios
-        .post(`http://localhost:3001/user/update/${user.id}`, user)
+        .post(`http://gits-mern.herokuapp.com/user/update/${user.id}`, user)
         .then((res) => console.log(res.data));
       this.setState({ redirectToView: true });
     } else
       axios
-        .post("http://localhost:3001/user/createUser", user)
+        .post("http://gits-mern.herokuapp.com/user/createUser", user)
         .then((res) => console.log(res.data));
     this.setState({ redirectToView: true });
   }

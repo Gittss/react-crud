@@ -7,7 +7,18 @@ class mainLayout extends Component {
     document.body.classList.add("text-light");
   }
   render() {
-    return <div></div>;
+    return (
+      <div className="container">
+        <a href="http://gayatrii.herokuapp.com" className="App-link">
+          <img src="hitmeup.png" alt="hitmeup"></img>
+        </a>
+        <p>
+          This is my first MERN application.
+          <br />
+          It is a simple create-read-update-delete app.
+        </p>
+      </div>
+    );
   }
 }
 
