@@ -4,7 +4,7 @@ const bodyparser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/user");
-const { path } = require("dotenv/lib/env-options");
+const path = require("path");
 
 var app = express();
 app.use(bodyparser.urlencoded({ extended: true }));
