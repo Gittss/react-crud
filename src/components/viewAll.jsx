@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+const config = require("../config.json");
 
 function deleteUser(id) {
   axios
@@ -43,7 +44,7 @@ class ViewAll extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://gits-mern.herokuapp.com/user/viewAll").then((res) => {
+    axios.get(`${config.EXPRESS_BASE_URL}/user/viewAll`).then((res) => {
       if (res.data.length > 0) {
         const users = res.data;
         this.setState({ users: users });

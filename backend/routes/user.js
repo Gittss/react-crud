@@ -20,6 +20,7 @@ router.route("/createUser").post((req, res) => {
 });
 
 router.get("/viewAll", (req, res) => {
+  console.log("ViewAll");
   User.find((err, docs) => {
     if (!err) {
       res.send(docs);

@@ -2,7 +2,6 @@ require("dotenv/config");
 const express = require("express");
 const bodyparser = require("body-parser");
 const cors = require("cors");
-const path = require("path");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/user");
 
@@ -11,8 +10,8 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 app.use(cors());
 
-app.listen(process.env.PORT, () => {
-  console.log("express server started at " + process.env.PORT);
+app.listen(process.env.EXPRESS_PORT, () => {
+  console.log("express server started at " + process.env.EXPRESS_PORT);
 });
 
 mongoose.connect(
