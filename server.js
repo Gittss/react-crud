@@ -4,14 +4,15 @@ const bodyparser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/user");
+const { path } = require("dotenv/lib/env-options");
 
 var app = express();
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 app.use(cors());
 
-app.listen(process.env.EXPRESS_PORT, () => {
-  console.log("express server started at " + process.env.EXPRESS_PORT);
+app.listen(process.env.PORT, () => {
+  console.log("express server started at " + process.env.PORT);
 });
 
 mongoose.connect(
@@ -30,3 +31,8 @@ mongoose.connect(
 );
 
 app.use("/user", userRouter);
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
+app.use(express.static("client/build"));

@@ -44,7 +44,7 @@ class ViewAll extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${config.EXPRESS_BASE_URL}/user/viewAll`).then((res) => {
+    axios.get(`http://gits-mern.herokuapp.com/user/viewAll`).then((res) => {
       if (res.data.length > 0) {
         const users = res.data;
         this.setState({ users: users });
