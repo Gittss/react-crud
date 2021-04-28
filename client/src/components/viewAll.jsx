@@ -4,7 +4,7 @@ import axios from "axios";
 
 function deleteUser(id) {
   axios
-    .get(`http://gits-mern.herokuapp.com/user/delete/${id}`)
+    .get(`https://gits-mern.herokuapp.com/user/delete/${id}`)
     .then((res) => console.log(res.data));
   window.location.reload();
 }
@@ -43,7 +43,7 @@ class ViewAll extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://gits-mern.herokuapp.com/user/viewAll`).then((res) => {
+    axios.get(`https://gits-mern.herokuapp.com/user/viewAll`).then((res) => {
       if (res.data.length > 0) {
         const users = res.data;
         this.setState({ users: users });
