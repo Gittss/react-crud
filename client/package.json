@@ -1,6 +1,5 @@
 {
-  "proxy": "http://localhost:3001",
-  "name": "react-app",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -44,5 +43,6 @@
   "devDependencies": {
     "dotenv": "^8.2.0",
     "webpack": "^4.44.2"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

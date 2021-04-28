@@ -64,7 +64,7 @@ class CreateUser extends Component {
       this.setState({ redirectToView: true });
     } else
       axios
-        .post("http://gits-mern.herokuapp.com/user/createUser", user)
+        .post("http://localhost:3001/user/createUser", user)
         .then((res) => console.log(res.data));
     this.setState({ redirectToView: true });
   }

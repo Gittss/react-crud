@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const config = require("../config.json");
 
 function deleteUser(id) {
   axios
